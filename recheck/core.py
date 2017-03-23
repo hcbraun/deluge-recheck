@@ -60,6 +60,7 @@ class Core(CorePluginBase):
         torrentmanager = component.get("TorrentManager")
         t = torrentmanager.torrents.get(torrent_id, None)
         t.force_recheck()
+        t.resume()
         log.info("[recheck] torrent finished recheck: %s / %s", t.torrent_id, t.state)
 
     def on_event_session_started(self):
@@ -69,6 +70,7 @@ class Core(CorePluginBase):
         for i in torrent_ids:
             t = torrentmanager.torrents.get(i, None)
             t.force_recheck()
+            t.resume()
             log.info("[recheck] session started recheck: %s / %s", t.torrent_id, t.state)
 
     @export
